@@ -40,8 +40,8 @@
             <div class="flex justify-between">
                 <div>
                     <p class="text-gray-500">Total Siswa</p>
-                    <h2 class="text-4xl font-bold mt-2">520</h2>
-                    <span class="text-green-500 text-sm">+20 minggu ini</span>
+                    <h2 class="text-4xl font-bold mt-2">{{ $totalStudents }}</h2>
+                    <span class="text-gray-500 text-sm">Total Pemilih</span>
                 </div>
 
                 <div class="w-14 h-14 rounded-xl bg-blue-100 flex items-center justify-center text-2xl">
@@ -56,7 +56,7 @@
             <div class="flex justify-between">
                 <div>
                     <p class="text-gray-500">Kandidat</p>
-                    <h2 class="text-4xl font-bold mt-2">3</h2>
+                    <h2 class="text-4xl font-bold mt-2">{{ $totalCandidates }}</h2>
                     <span class="text-gray-400 text-sm">Pasangan Calon</span>
                 </div>
 
@@ -72,8 +72,13 @@
             <div class="flex justify-between">
                 <div>
                     <p class="text-gray-500">Sudah Memilih</p>
-                    <h2 class="text-4xl font-bold text-green-600 mt-2">350</h2>
-                    <span class="text-green-500 text-sm">67%</span>
+                    <h2 class="text-4xl font-bold text-green-600 mt-2">
+                        {{ $totalVotes }}
+                    </h2>
+
+                    <span class="text-green-500 text-sm">
+                        {{ $persentaseVote }}%
+                    </span>
                 </div>
 
                 <div class="w-14 h-14 rounded-xl bg-green-100 flex items-center justify-center text-2xl">
@@ -88,8 +93,13 @@
             <div class="flex justify-between">
                 <div>
                     <p class="text-gray-500">Belum Memilih</p>
-                    <h2 class="text-4xl font-bold text-red-500 mt-2">170</h2>
-                    <span class="text-red-400 text-sm">33%</span>
+                    <h2 class="text-4xl font-bold text-red-500 mt-2">
+                        {{ $belumVote }}
+                    </h2>
+
+                    <span class="text-red-400 text-sm">
+                        {{ 100-$persentaseVote }}%
+                    </span>
                 </div>
 
                 <div class="w-14 h-14 rounded-xl bg-red-100 flex items-center justify-center text-2xl">
@@ -162,26 +172,27 @@
 
                 <tbody>
 
-                    <tr class="border-b">
-                        <td class="py-4">1</td>
-                        <td>Andi & Budi</td>
-                        <td class="font-bold text-blue-600">180</td>
-                    </tr>
+                @foreach($ranking as $index => $item)
 
-                    <tr class="border-b">
-                        <td class="py-4">2</td>
-                        <td>Doni & Rizky</td>
-                        <td class="font-bold text-green-600">120</td>
-                    </tr>
+                <tr class="border-b">
 
-                    <tr>
-                        <td class="py-4">3</td>
-                        <td>Raka & Fajar</td>
-                        <td class="font-bold text-red-500">50</td>
-                    </tr>
+                    <td class="py-4">
+                        {{ $index + 1 }}
+                    </td>
+
+                    <td>
+                        {{ $item->ketua }} & {{ $item->wakil }}
+                    </td>
+
+                    <td class="font-bold text-blue-600">
+                        {{ $item->votes_count }}
+                    </td>
+
+                </tr>
+
+                @endforeach
 
                 </tbody>
-
             </table>
 
         </div>
@@ -245,8 +256,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
             name:'Jumlah Voting',
 
-            data:[15,42,78,120,180,250,310,350]
-
+            data:[{{ $totalVotes }}]
         }],
 
         colors:['#2563eb'],
@@ -295,8 +305,7 @@ document.addEventListener("DOMContentLoaded", function(){
             height:300
         },
 
-        series:[67],
-
+        series:[{{ $persentaseVote }}],
         colors:['#2563eb'],
 
         plotOptions:{
@@ -318,6 +327,7 @@ document.addEventListener("DOMContentLoaded", function(){
             }
 
         },
+        
 
         labels:['Voting']
 

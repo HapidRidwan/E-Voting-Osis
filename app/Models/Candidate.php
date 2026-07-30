@@ -2,13 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Candidate extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'nomor_urut',
         'ketua',
@@ -18,4 +15,15 @@ class Candidate extends Model
         'visi',
         'misi',
     ];
+
+    public function votes()
+    {
+        return $this->hasMany(Vote::class);
+    }
+
+    public function vote()
+    {
+        return $this->hasMany(\App\Models\Vote::class);
+    }
 }
+

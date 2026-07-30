@@ -24,4 +24,11 @@ class Vote extends Model
     {
         return $this->belongsTo(Candidate::class);
     }
+
+    public function index()
+    {
+        $candidates = Candidate::orderBy('nomor_urut')->get();
+
+        return view('vote.index', compact('candidates'));
+    }
 }

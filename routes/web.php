@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CandidateController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\VoteController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return Auth ::check()
@@ -11,9 +13,9 @@ Route::get('/', function () {
     : redirect()->route('login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class,'index'])
+    ->middleware(['auth'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -21,7 +23,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
 
 Route::middleware(['auth'])->group(function () {
 
@@ -42,3 +43,24 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
 Route::get('/students/export/pdf', [StudentController::class, 'exportPdf'])
     ->name('students.export.pdf');
+
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::resource('students', StudentController::class);
+
+    Route::resource('candidates', CandidateController::class);
+
+});
+
+
+Route::middleware('auth')->group(function () {
+
+    Route::get('/vote', [VoteController::class, 'index'])->name('vote.index');
+
+    Route::post('/vote', [VoteController::class, 'store'])->name('vote.store');
+
+    Route::get('/vote/success', [VoteController::class, 'success'])->name('vote.success');
+
+});
+require __DIR__.'/auth.php';

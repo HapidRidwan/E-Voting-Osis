@@ -19,8 +19,7 @@ return new class extends Migration
             $table->string('ketua',100);
             $table->string('wakil',100);
 
-            $table->string('foto_ketua')->nullable();
-            $table->string('foto_wakil')->nullable();
+            $table->string('foto')->nullable();
 
             $table->longText('visi');
             $table->longText('misi');
