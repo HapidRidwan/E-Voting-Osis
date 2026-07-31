@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Candidate extends Model
 {
@@ -16,14 +17,8 @@ class Candidate extends Model
         'misi',
     ];
 
-    public function votes()
+    public function votes(): HasMany
     {
         return $this->hasMany(Vote::class);
     }
-
-    public function vote()
-    {
-        return $this->hasMany(\App\Models\Vote::class);
-    }
 }
-

@@ -10,22 +10,35 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $totalStudents = User::where('role','student')->count();
+        // Total siswa
+        $totalStudents = User::where('role', 'student')->count();
 
+        // Total kandidat
         $totalCandidates = Candidate::count();
 
+        // Total suara
         $totalVotes = Vote::count();
 
-        $belumVoting = $totalStudents - $totalVotes;
+        // Belum memilih
+        $belumVote = $totalStudents - $totalVotes;
 
-        $candidates = Candidate::withCount('votes')->get();
+        // Persentase voting
+        $persentaseVote = $totalStudents > 0
+            ? round(($totalVotes / $totalStudents) * 100, 2)
+            : 0;
+
+        // Ranking kandidat
+        $ranking = Candidate::withCount('votes')
+            ->orderByDesc('votes_count')
+            ->get();
 
         return view('dashboard', compact(
             'totalStudents',
             'totalCandidates',
             'totalVotes',
-            'belumVoting',
-            'candidates'
+            'belumVote',
+            'persentaseVote',
+            'ranking'
         ));
     }
 }

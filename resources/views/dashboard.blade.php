@@ -228,6 +228,15 @@
             </div>
 
         </div>
+        <div class="bg-white rounded-2xl shadow p-6 mt-6">
+
+            <h2 class="font-bold text-xl mb-4">
+                Hasil Suara Kandidat
+            </h2>
+
+            <div id="candidateChart"></div>
+
+        </div>
 
     </div>
 
@@ -333,9 +342,43 @@ document.addEventListener("DOMContentLoaded", function(){
 
     };
 
+        new ApexCharts(
+            document.querySelector("#pieChart"),
+            pie
+        ).render();
+
+        var kandidat = {
+
+        chart:{
+            type:'bar',
+            height:350
+        },
+
+        series:[{
+
+            name:'Suara',
+
+            data:[
+                @foreach($ranking as $item)
+                    {{ $item->votes_count }},
+                @endforeach
+            ]
+
+        }],
+
+        xaxis:{
+            categories:[
+                @foreach($ranking as $item)
+                    "No {{ $item->nomor_urut }}",
+                @endforeach
+            ]
+        }
+
+    };
+
     new ApexCharts(
-        document.querySelector("#pieChart"),
-        pie
+        document.querySelector("#candidateChart"),
+        kandidat
     ).render();
 
 });
