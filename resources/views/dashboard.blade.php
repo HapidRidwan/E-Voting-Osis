@@ -19,15 +19,21 @@
 
         </div>
 
-        <div class="bg-blue-500 hover:bg-blue-600 text-white rounded-2xl px-6 py-4 shadow">
+        <div class="bg-white rounded-xl shadow p-4">
 
-            <p class="text-sm">
-                Status Voting
-            </p>
+            @if($setting && $setting->voting_open)
+                <span class="text-green-600 font-bold">DIBUKA</span>
+            @else
+                <span class="text-red-600 font-bold">DITUTUP</span>
+            @endif
 
-            <h2 class="text-1x1 font-bold">
-                DIBUKA
-            </h2>
+            <form action="{{ route('setting.toggle') }}" method="POST" class="mt-3">
+                @csrf
+
+                <button class="bg-blue-600 text-white px-4 py-2 rounded">
+                    Ubah Status
+                </button>
+            </form>
 
         </div>
 
@@ -196,41 +202,9 @@
             </table>
 
         </div>
-
         <div class="bg-white rounded-2xl shadow p-6">
 
             <h2 class="font-bold text-xl mb-6">
-                Aktivitas Terbaru
-            </h2>
-
-            <div class="space-y-5">
-
-                <div class="border-l-4 border-blue-600 pl-4">
-                    Admin Login
-                    <p class="text-sm text-gray-500">08:00 WIB</p>
-                </div>
-
-                <div class="border-l-4 border-green-600 pl-4">
-                    Voting Dibuka
-                    <p class="text-sm text-gray-500">08:15 WIB</p>
-                </div>
-
-                <div class="border-l-4 border-yellow-500 pl-4">
-                    Kandidat Ditambahkan
-                    <p class="text-sm text-gray-500">08:30 WIB</p>
-                </div>
-
-                <div class="border-l-4 border-red-500 pl-4">
-                    25 Siswa Melakukan Voting
-                    <p class="text-sm text-gray-500">09:00 WIB</p>
-                </div>
-
-            </div>
-
-        </div>
-        <div class="bg-white rounded-2xl shadow p-6 mt-6">
-
-            <h2 class="font-bold text-xl mb-4">
                 Hasil Suara Kandidat
             </h2>
 
