@@ -32,11 +32,7 @@ class AuthenticatedSessionController extends Controller
             return redirect()->route('dashboard');
         }
 
-        if (auth()->user()->role === 'siswa') {
-            return redirect()->route('student.dashboard');
-        }
-
-        return redirect('/');
+        return redirect()->route('student.dashboard');
     }
     /**
      * Destroy an authenticated session.

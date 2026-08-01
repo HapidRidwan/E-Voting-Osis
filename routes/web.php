@@ -12,9 +12,13 @@ use App\Http\Controllers\Admin\CandidateController;
 use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
 
 Route::get('/', function () {
-    return Auth::check()
-        ? redirect()->route('dashboard')
-        : redirect()->route('login');
+    if (Auth::check()) {
+        return Auth::user()->role === 'admin'
+            ? redirect()->route('dashboard')
+            : redirect()->route('student.dashboard');
+    }
+
+    return redirect()->route('login');
 });
 
 
@@ -71,6 +75,15 @@ Route::middleware(['auth', 'siswa'])
 
         Route::get('/status', [StudentDashboardController::class, 'status'])
             ->name('student.status');
+
+        Route::get('/vote', [VoteController::class, 'index'])
+            ->name('vote.index');
+
+        Route::post('/vote', [VoteController::class, 'store'])
+            ->name('vote.store');
+
+        Route::get('/vote/success', [VoteController::class, 'success'])
+            ->name('vote.success');
 });
 
 

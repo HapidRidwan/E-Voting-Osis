@@ -115,41 +115,126 @@
 
     <div>
 
-        <h2 class="text-2xl font-bold mb-5">
-
-            Kandidat Ketua OSIS
-
+        <h2 class="text-2xl font-bold mb-5 text-gray-800">
+            Kandidat Ketua & Wakil Ketua OSIS
         </h2>
 
         <div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-6">
 
             @foreach($candidates as $candidate)
 
-            <div class="bg-white rounded-3xl shadow overflow-hidden hover:shadow-xl transition">
+            <div class="bg-white rounded-3xl shadow-md border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col">
 
-                <img
-                    src="{{ asset('storage/'.$candidate->foto) }}"
-                    class="w-full h-72 object-cover">
+                <!-- Auto-sliding Photo Carousel -->
+                <div x-data="{ activeSlide: 0, timer: null }"
+                     x-init="timer = setInterval(() => { activeSlide = activeSlide === 0 ? 1 : 0 }, 3500)"
+                     @mouseenter="clearInterval(timer)"
+                     @mouseleave="timer = setInterval(() => { activeSlide = activeSlide === 0 ? 1 : 0 }, 3500)"
+                     class="relative w-full h-72 overflow-hidden bg-gray-100 group">
 
-                <div class="p-5">
+                    <!-- Slide 1: Foto Ketua -->
+                    <div x-show="activeSlide === 0"
+                         x-transition:enter="transition ease-out duration-500"
+                         x-transition:enter-start="opacity-0 scale-95"
+                         x-transition:enter-end="opacity-100 scale-100"
+                         x-transition:leave="transition ease-in duration-300"
+                         x-transition:leave-start="opacity-100 scale-100"
+                         x-transition:leave-end="opacity-0 scale-95"
+                         class="absolute inset-0">
+                        @if($candidate->foto_ketua)
+                            <img src="{{ asset('storage/'.$candidate->foto_ketua) }}" alt="Foto Ketua" class="w-full h-72 object-cover">
+                        @else
+                            <div class="w-full h-72 bg-gradient-to-br from-blue-600 to-indigo-700 flex flex-col items-center justify-center text-white">
+                                <svg class="w-16 h-16 opacity-75" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                <span class="mt-2 text-xs font-medium tracking-wide">Foto Ketua Belum Ada</span>
+                            </div>
+                        @endif
+                        <div class="absolute bottom-3 left-3 bg-blue-600/90 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-semibold shadow-md flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                            Ketua: {{ $candidate->ketua }}
+                        </div>
+                    </div>
 
-                    <span class="text-sm text-blue-600 font-semibold">
+                    <!-- Slide 2: Foto Wakil -->
+                    <div x-show="activeSlide === 1"
+                         x-transition:enter="transition ease-out duration-500"
+                         x-transition:enter-start="opacity-0 scale-95"
+                         x-transition:enter-end="opacity-100 scale-100"
+                         x-transition:leave="transition ease-in duration-300"
+                         x-transition:leave-start="opacity-100 scale-100"
+                         x-transition:leave-end="opacity-0 scale-95"
+                         class="absolute inset-0"
+                         style="display: none;">
+                        @if($candidate->foto_wakil)
+                            <img src="{{ asset('storage/'.$candidate->foto_wakil) }}" alt="Foto Wakil" class="w-full h-72 object-cover">
+                        @else
+                            <div class="w-full h-72 bg-gradient-to-br from-indigo-600 to-purple-700 flex flex-col items-center justify-center text-white">
+                                <svg class="w-16 h-16 opacity-75" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                <span class="mt-2 text-xs font-medium tracking-wide">Foto Wakil Belum Ada</span>
+                            </div>
+                        @endif
+                        <div class="absolute bottom-3 left-3 bg-indigo-600/90 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-semibold shadow-md flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-yellow-400 animate-pulse"></span>
+                            Wakil: {{ $candidate->wakil }}
+                        </div>
+                    </div>
 
-                        Nomor {{ $candidate->nomor_urut }}
+                    <!-- Badge Nomor Urut -->
+                    <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-gray-900 font-extrabold px-3 py-1 rounded-2xl text-xs shadow-md border border-white/50">
+                        Paslon #{{ $candidate->nomor_urut }}
+                    </div>
 
-                    </span>
+                    <!-- Navigation Indicators -->
+                    <div class="absolute bottom-3 right-3 flex space-x-1.5 z-10 bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-full">
+                        <button @click="activeSlide = 0"
+                                :class="activeSlide === 0 ? 'bg-white w-4' : 'bg-white/50 w-2'"
+                                class="h-2 rounded-full transition-all duration-300"
+                                title="Foto Ketua"></button>
+                        <button @click="activeSlide = 1"
+                                :class="activeSlide === 1 ? 'bg-white w-4' : 'bg-white/50 w-2'"
+                                class="h-2 rounded-full transition-all duration-300"
+                                title="Foto Wakil"></button>
+                    </div>
 
-                    <h3 class="text-xl font-bold mt-2">
+                    <!-- Left / Right Manual Arrows -->
+                    <button @click="activeSlide = activeSlide === 0 ? 1 : 0" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/30 hover:bg-black/60 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button @click="activeSlide = activeSlide === 0 ? 1 : 0" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/30 hover:bg-black/60 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
 
-                        {{ $candidate->nama }}
+                </div>
 
-                    </h3>
+                <!-- Detail Content -->
+                <div class="p-5 flex-1 flex flex-col justify-between">
+
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-semibold uppercase tracking-wider text-blue-600 bg-blue-50 px-2.5 py-1 rounded-lg">
+                                Paslon Nomor {{ $candidate->nomor_urut }}
+                            </span>
+                        </div>
+
+                        <h3 class="text-lg font-bold text-gray-900">
+                            {{ $candidate->ketua }}
+                        </h3>
+                        <p class="text-sm text-gray-600 flex items-center gap-1 mt-0.5">
+                            <span class="text-xs text-gray-400">Wakil:</span>
+                            <span class="font-medium text-gray-700">{{ $candidate->wakil }}</span>
+                        </p>
+
+                        @if($candidate->visi)
+                            <div class="mt-3 text-xs text-gray-500 line-clamp-2 bg-gray-50 p-2.5 rounded-xl border border-gray-100">
+                                <span class="font-semibold text-gray-700">Visi:</span> {{ $candidate->visi }}
+                            </div>
+                        @endif
+                    </div>
 
                     <a href="{{ route('student.candidates') }}"
-                       class="mt-5 inline-block w-full text-center bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700">
-
-                        Lihat Detail
-
+                       class="mt-5 inline-flex items-center justify-center w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-xl transition duration-200 shadow-sm gap-2 text-sm">
+                        <span>Lihat Detail Kandidat</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                     </a>
 
                 </div>

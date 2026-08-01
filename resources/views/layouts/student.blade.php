@@ -19,42 +19,56 @@
          <img src="{{ asset('images/logo.png') }}" class="h-6 me-3" alt="Flowbite Logo" />
          <span class="self-center text-lg text-heading font-semibold whitespace-nowrap">E-Voting</span>
       </a>
-      <ul class="space-y-2 font-medium">
+      <ul class="space-y-1.5 font-medium">
+         <!-- Dashboard -->
          <li>
-            <a href="{{ route('student.dashboard') }}" class="flex items-center px-2 py-1.5 text-body rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group">
-               <svg class="w-5 h-5 transition duration-75 group-hover:text-fg-brand" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6.025A7.5 7.5 0 1 0 17.975 14H10V6.025Z"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.5 3c-.169 0-.334.014-.5.025V11h7.975c.011-.166.025-.331.025-.5A7.5 7.5 0 0 0 13.5 3Z"/></svg>
+            <a href="{{ route('student.dashboard') }}" class="flex items-center px-3 py-2.5 rounded-xl transition duration-150 {{ request()->routeIs('student.dashboard') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-gray-700 hover:bg-gray-100 hover:text-blue-600' }}">
+               <svg class="w-5 h-5 shrink-0 transition duration-75 {{ request()->routeIs('student.dashboard') ? 'text-blue-600' : 'text-gray-500 group-hover:text-blue-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                <span class="ms-3">Dashboard</span>
             </a>
          </li>
+
+         <!-- Kandidat -->
          <li>
-            <a href="#" class="flex items-center px-2 py-1.5 text-body rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group">
-               <svg class="shrink-0 w-5 h-5 transition duration-75 group-hover:text-fg-brand" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v14M9 5v14M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/></svg>
-               <span class="flex-1 ms-3 whitespace-nowrap">Kandidat</span>
+            <a href="{{ route('student.candidates') }}" class="flex items-center px-3 py-2.5 rounded-xl transition duration-150 {{ request()->routeIs('student.candidates') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-gray-700 hover:bg-gray-100 hover:text-blue-600' }}">
+               <svg class="w-5 h-5 shrink-0 transition duration-75 {{ request()->routeIs('student.candidates') ? 'text-blue-600' : 'text-gray-500 group-hover:text-blue-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+               <span class="ms-3">Kandidat</span>
             </a>
          </li>
+
+         <!-- Bilik Voting -->
          <li>
-            <a href="#" class="flex items-center px-2 py-1.5 text-body rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group">
-               <svg class="shrink-0 w-5 h-5 transition duration-75 group-hover:text-fg-brand" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 13h3.439a.991.991 0 0 1 .908.6 3.978 3.978 0 0 0 7.306 0 .99.99 0 0 1 .908-.6H20M4 13v6a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-6M4 13l2-9h12l2 9M9 7h6m-7 3h8"/></svg>
-               <span class="flex-1 ms-3 whitespace-nowrap">Visi & Misi</span>
+            <a href="{{ route('vote.index') }}" class="flex items-center px-3 py-2.5 rounded-xl transition duration-150 {{ request()->routeIs('vote.index') ? 'bg-blue-600 text-white font-bold shadow-md' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600' }}">
+               <svg class="w-5 h-5 shrink-0 transition duration-75 {{ request()->routeIs('vote.index') ? 'text-white' : 'text-blue-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+               <span class="ms-3">Bilik Voting</span>
             </a>
          </li>
+
+         <!-- Visi & Misi -->
          <li>
-            <a href="#" class="flex items-center px-2 py-1.5 text-body rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group">
-               <svg class="shrink-0 w-5 h-5 transition duration-75 group-hover:text-fg-brand" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M16 19h4a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-2m-2.236-4a3 3 0 1 0 0-4M3 18v-1a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Zm8-10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>
-               <span class="flex-1 ms-3 whitespace-nowrap">Status Voting</span>
+            <a href="{{ route('student.vision') }}" class="flex items-center px-3 py-2.5 rounded-xl transition duration-150 {{ request()->routeIs('student.vision') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-gray-700 hover:bg-gray-100 hover:text-blue-600' }}">
+               <svg class="w-5 h-5 shrink-0 transition duration-75 {{ request()->routeIs('student.vision') ? 'text-blue-600' : 'text-gray-500 group-hover:text-blue-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+               <span class="ms-3">Visi & Misi</span>
             </a>
          </li>
+
+         <!-- Status Voting -->
          <li>
-            <a href="#" class="flex items-center px-2 py-1.5 text-body rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group">
-               <svg class="shrink-0 w-5 h-5 transition duration-75 group-hover:text-fg-brand" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 10V6a3 3 0 0 1 3-3v0a3 3 0 0 1 3 3v4m3-2 .917 11.923A1 1 0 0 1 17.92 21H6.08a1 1 0 0 1-.997-1.077L6 8h12Z"/></svg>
-               <span class="flex-1 ms-3 whitespace-nowrap">Log out</span>
+            <a href="{{ route('student.status') }}" class="flex items-center px-3 py-2.5 rounded-xl transition duration-150 {{ request()->routeIs('student.status') ? 'bg-blue-50 text-blue-600 font-bold' : 'text-gray-700 hover:bg-gray-100 hover:text-blue-600' }}">
+               <svg class="w-5 h-5 shrink-0 transition duration-75 {{ request()->routeIs('student.status') ? 'text-blue-600' : 'text-gray-500 group-hover:text-blue-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+               <span class="ms-3">Status Voting</span>
             </a>
          </li>
-         <li>
-            <a href="#" class="flex items-center px-2 py-1.5 text-body rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group">
-               <svg class="shrink-0 w-5 h-5 transition duration-75 group-hover:text-fg-brand" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H4m12 0-4 4m4-4-4-4m3-4h2a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3h-2"/></svg>
-               <span class="flex-1 ms-3 whitespace-nowrap">Sign In</span>
-            </a>
+
+         <!-- Log out -->
+         <li class="pt-4 border-t border-gray-100 mt-2">
+            <form method="POST" action="{{ route('logout') }}">
+               @csrf
+               <button type="submit" class="w-full flex items-center px-3 py-2.5 text-red-600 rounded-xl hover:bg-red-50 transition duration-150 group">
+                  <svg class="w-5 h-5 shrink-0 text-red-600 transition duration-75" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                  <span class="ms-3 text-left whitespace-nowrap font-medium">Log out</span>
+               </button>
+            </form>
          </li>
       </ul>
    </div>
@@ -64,19 +78,28 @@
     <!-- DITAMBAHKAN: sm:ml-64 agar konten bergeser di desktop, dan pb-24 agar area bawah tidak tertutup nav mobile -->
     <main class="flex-1 sm:ml-64 pb-24 sm:pb-0">
 
-        <header class="bg-white shadow px-6 py-5 flex justify-between">
+        <header class="bg-white shadow px-6 py-4 flex justify-between items-center border-b border-gray-200">
             <div>
-                <h2 class="font-bold text-2xl">
+                <h2 class="font-bold text-xl text-gray-800">
                     @yield('title')
                 </h2>
             </div>
-            <div class="text-right">
-                <h3 class="font-semibold">
-                    {{ Auth::user()->name }}
-                </h3>
-                <p class="text-gray-500 text-sm">
-                    {{ Auth::user()->kelas }}
-                </p>
+            <div class="flex items-center gap-4">
+                <div class="text-right">
+                    <h3 class="font-semibold text-sm text-gray-800">
+                        {{ Auth::user()->name }}
+                    </h3>
+                    <p class="text-gray-500 text-xs">
+                        {{ Auth::user()->kelas }} (Siswa)
+                    </p>
+                </div>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="px-3 py-1.5 text-xs font-semibold text-red-600 hover:text-white bg-red-50 hover:bg-red-600 rounded-lg border border-red-200 transition duration-200 flex items-center gap-1">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                        Logout
+                    </button>
+                </form>
             </div>
         </header>
 
@@ -89,51 +112,56 @@
 </div>
 
 <!-- Bottom Navigation Mobile -->
-<!-- DITAMBAHKAN: sm:hidden agar navbar ini hilang di desktop/tablet -->
-<div class="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-neutral-primary-soft border border-default rounded-full bottom-4 left-1/2 sm:hidden">
-    <div class="grid h-full max-w-lg grid-cols-5 mx-auto">
-        <button data-tooltip-target="tooltip-home" type="button" class="inline-flex flex-col items-center justify-center px-5 rounded-s-full hover:bg-neutral-secondary-medium group">
-            <svg class="w-6 h-6 mb-1 text-body group-hover:text-fg-brand" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5"/></svg>
-            <span class="sr-only">Home</span>
-        </button>
-        <div id="tooltip-home" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-dark rounded-base shadow-xs opacity-0 tooltip">
-            Home
-            <div class="tooltip-arrow" data-popper-arrow></div>
-        </div>
-        <button data-tooltip-target="tooltip-wallet" type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-neutral-secondary-medium group">
-            <svg class="w-6 h-6 mb-1 text-body group-hover:text-fg-brand" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8H5m12 0a1 1 0 0 1 1 1v2.6M17 8l-4-4M5 8a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.6M5 8l4-4 4 4m6 4h-4a2 2 0 1 0 0 4h4a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1Z"/></svg>
-            <span class="sr-only">Wallet</span>
-        </button>
-        <div id="tooltip-wallet" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-dark rounded-base shadow-xs opacity-0 tooltip">
-            Wallet
-            <div class="tooltip-arrow" data-popper-arrow></div>
-        </div>
+<div class="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white/95 backdrop-blur-md border border-gray-200 rounded-full bottom-4 left-1/2 sm:hidden shadow-xl px-2">
+    <div class="grid h-full max-w-lg grid-cols-5 mx-auto items-center">
+
+        <!-- 1. Dashboard -->
+        <a href="{{ route('student.dashboard') }}"
+           class="inline-flex flex-col items-center justify-center py-1 rounded-s-full hover:bg-blue-50 group {{ request()->routeIs('student.dashboard') ? 'text-blue-600 font-bold' : 'text-gray-500' }}">
+            <svg class="w-5 h-5 mb-0.5 {{ request()->routeIs('student.dashboard') ? 'text-blue-600' : 'text-gray-500 group-hover:text-blue-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+            </svg>
+            <span class="text-[10px] tracking-tight">Beranda</span>
+        </a>
+
+        <!-- 2. Kandidat -->
+        <a href="{{ route('student.candidates') }}"
+           class="inline-flex flex-col items-center justify-center py-1 hover:bg-blue-50 group {{ request()->routeIs('student.candidates') ? 'text-blue-600 font-bold' : 'text-gray-500' }}">
+            <svg class="w-5 h-5 mb-0.5 {{ request()->routeIs('student.candidates') ? 'text-blue-600' : 'text-gray-500 group-hover:text-blue-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+            <span class="text-[10px] tracking-tight">Kandidat</span>
+        </a>
+
+        <!-- 3. Vote (Tombol Utama Tengah) -->
         <div class="flex items-center justify-center">
-            <button data-tooltip-target="tooltip-new" type="button" class="inline-flex items-center justify-center text-white bg-brand hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs rounded-full w-8 h-8 focus:outline-none">
-                <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/></svg>
-                <span class="sr-only">New item</span>
-            </button>
+            <a href="{{ route('vote.index') }}"
+               class="inline-flex items-center justify-center text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 shadow-md rounded-full w-10 h-10 transition transform hover:scale-105"
+               title="Bilik Voting">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </a>
         </div>
-        <div id="tooltip-new" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-dark rounded-base shadow-xs opacity-0 tooltip">
-            Create new item
-            <div class="tooltip-arrow" data-popper-arrow></div>
-        </div>
-        <button data-tooltip-target="tooltip-settings" type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-neutral-secondary-medium group">
-            <svg class="w-6 h-6 mb-1 text-body group-hover:text-fg-brand" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M6 4v10m0 0a2 2 0 1 0 0 4m0-4a2 2 0 1 1 0 4m0 0v2m6-16v2m0 0a2 2 0 1 0 0 4m0-4a2 2 0 1 1 0 4m0 0v10m6-16v10m0 0a2 2 0 1 0 0 4m0-4a2 2 0 1 1 0 4m0 0v2"/></svg>
-            <span class="sr-only">Settings</span>
-        </button>
-        <div id="tooltip-settings" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-dark rounded-base shadow-xs opacity-0 tooltip">
-            Settings
-            <div class="tooltip-arrow" data-popper-arrow></div>
-        </div>
-        <button data-tooltip-target="tooltip-profile" type="button" class="inline-flex flex-col items-center justify-center px-5 rounded-e-full hover:bg-neutral-secondary-medium group">
-            <svg class="w-6 h-6 mb-1 text-body group-hover:text-fg-brand" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 13 16h-2a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 12 21Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>
-            <span class="sr-only">Profile</span>
-        </button>
-        <div id="tooltip-profile" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-dark rounded-base shadow-xs opacity-0 tooltip">
-            Profile
-            <div class="tooltip-arrow" data-popper-arrow></div>
-        </div>
+
+        <!-- 4. Visi & Misi -->
+        <a href="{{ route('student.vision') }}"
+           class="inline-flex flex-col items-center justify-center py-1 hover:bg-blue-50 group {{ request()->routeIs('student.vision') ? 'text-blue-600 font-bold' : 'text-gray-500' }}">
+            <svg class="w-5 h-5 mb-0.5 {{ request()->routeIs('student.vision') ? 'text-blue-600' : 'text-gray-500 group-hover:text-blue-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="text-[10px] tracking-tight">Visi Misi</span>
+        </a>
+
+        <!-- 5. Status Voting -->
+        <a href="{{ route('student.status') }}"
+           class="inline-flex flex-col items-center justify-center py-1 rounded-e-full hover:bg-blue-50 group {{ request()->routeIs('student.status') ? 'text-blue-600 font-bold' : 'text-gray-500' }}">
+            <svg class="w-5 h-5 mb-0.5 {{ request()->routeIs('student.status') ? 'text-blue-600' : 'text-gray-500 group-hover:text-blue-600' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            <span class="text-[10px] tracking-tight">Status</span>
+        </a>
+
     </div>
 </div>
 

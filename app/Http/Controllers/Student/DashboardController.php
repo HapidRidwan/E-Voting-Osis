@@ -18,12 +18,15 @@ class DashboardController extends Controller
 
         $sudahVote = Vote::where('user_id', $user->id)->exists();
 
-        $totalKandidat = Candidate::count();
+        $candidates = Candidate::orderBy('nomor_urut')->get();
+
+        $totalKandidat = $candidates->count();
 
         return view('student.dashboard', compact(
             'user',
             'setting',
             'sudahVote',
+            'candidates',
             'totalKandidat'
         ));
     }
