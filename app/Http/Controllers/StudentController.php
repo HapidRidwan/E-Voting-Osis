@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Student;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Log;
-
 class StudentController extends Controller
 {
     /**
@@ -15,7 +14,9 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::latest()->get();
+        $students = User::where('role', 'siswa')
+        ->latest()
+        ->get();
 
         return view('admin.students.index', compact('students'));
     }
@@ -35,37 +36,30 @@ class StudentController extends Controller
 
     public function store(Request $request)
     {
-        try {
+    $request->validate([
+        'nis' => 'required|unique:users',
+        'nama' => 'required',
+        'kelas' => 'required',
+        'username' => 'required|unique:users',
+    ]);
 
-            $request->validate([
-                'nis' => 'required|unique:students',
-                'nama' => 'required',
-                'kelas' => 'required',
-                'username' => 'required|unique:students',
-                'password' => 'required|min:4',
-            ]);
+    User::create([
+        'nis' => $request->nis,
+        'name' => $request->nama,
+        'kelas' => $request->kelas,
+        'username' => $request->username,
+        'role' => 'siswa',
+        'password' => Hash::make($request->nis),
+    ]);
 
-            Student::create([
-                'nis' => $request->nis,
-                'nama' => $request->nama,
-                'kelas' => $request->kelas,
-                'username' => $request->username,
-                'password' => Hash::make($request->password),
-            ]);
-
-            return redirect()->route('students.index')
-                ->with('success', 'Berhasil');
-
-        } catch (\Exception $e) {
-
-            dd($e->getMessage());
-
-        }
+        return redirect()
+            ->route('students.index')
+            ->with('success', 'Data siswa berhasil ditambahkan');
     }
     /**
      * Display the specified resource.
      */
-    public function show(Student $student)
+    public function show(User $student)
     {
         //
     }
@@ -73,7 +67,7 @@ class StudentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Student $student)
+    public function edit(User $student)
     {
         return view('admin.students.edit', compact('student'));
     }
@@ -82,10 +76,10 @@ class StudentController extends Controller
      * Update the specified resource in storage.
      */
 
-    public function update(Request $request, Student $student)
+    public function update(Request $request, User $student)
     {
         $student->nis = $request->nis;
-        $student->nama = $request->nama;
+        $student->name = $request->nama;
         $student->kelas = $request->kelas;
         $student->username = $request->username;
 
@@ -103,7 +97,7 @@ class StudentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Student $student)
+    public function destroy(User $student)
     {
         $student->delete();
 
@@ -114,8 +108,9 @@ class StudentController extends Controller
 
     public function exportPdf()
     {
-        $students = Student::orderBy('kelas')
-            ->orderBy('nama')
+        $students = User::where('role', 'siswa')
+            ->orderBy('kelas')
+            ->orderBy('name')
             ->get();
 
         $pdf = Pdf::loadView('pdf.students', compact('students'));

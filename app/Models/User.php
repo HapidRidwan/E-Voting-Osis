@@ -12,18 +12,25 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Models\Vote;
 
-#[Fillable(['name', 'username', 'kelas', 'role', 'password'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
-
+    
     /**
      * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
+    *
+    * @return array<string, string>
+    */
+    protected $fillable = [
+        'nis',
+        'name',
+        'username',
+        'kelas',
+        'password',
+        'role',
+    ];
     protected function casts(): array
     {
         return [
@@ -34,4 +41,5 @@ class User extends Authenticatable
     {
         return $this->hasOne(Vote::class);
     }
+
 }

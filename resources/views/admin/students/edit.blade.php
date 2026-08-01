@@ -46,7 +46,7 @@
                     <input
                         type="text"
                         name="nama"
-                        value="{{ old('nama', $student->nama) }}"
+                        value="{{ old('nama', $student->name) }}"
                         class="w-full border rounded-xl px-4 py-3 focus:ring-blue-500 focus:border-blue-500">
 
                 </div>

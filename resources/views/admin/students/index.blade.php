@@ -89,7 +89,7 @@
                         </td>
 
                         <td class="px-6 py-4 font-medium">
-                            {{ $student->nama }}
+                            {{ $student->name }}
                         </td>
 
                         <td class="px-6 py-4">
@@ -101,7 +101,7 @@
                         </td>
 
                         <td class="px-6 py-4">
-                            evote{{ $student->nis }}
+                            {{ $student->nis }}
                         </td>
                         <td class="px-6 py-4 text-center">
 
